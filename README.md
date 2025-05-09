@@ -16,6 +16,10 @@ Run directly train.py
 Run directly val.py
 
 CD-Yolov8s,yolov9,yolov10,yolov11的训练结果在run中的results.csv,记录了200轮的精度以及LOSS变化
+
+
 The training results of CD-Yolov8s, yolov9, yolov10, yolov11 are results.csv in the run, the accuracy of 200 rounds is recorded, as well as the change in LOSS
+
+
 run/CD-Yolov8s/result.csv
 
