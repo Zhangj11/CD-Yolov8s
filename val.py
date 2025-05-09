@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
 # Load a model
-model = YOLO('runs/detect/train2/weights/best.pt')  # load a custom model
+model = YOLO('runs/detect/train/weights/best.pt')  # load a custom model
 # print("abcd")
 # Validate the model
 # 验证的时候把batch-size调成1

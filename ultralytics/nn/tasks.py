@@ -34,11 +34,10 @@ from ultralytics.nn.Biformer import BiLevelRoutingAttention as Biformer
 from ultralytics.nn.SENetV2 import SELayerV2, C2f_SENetV2
 from ultralytics.nn.ACmix import ACmix
 from ultralytics.nn.AFF import C2f_iAFF
-from ultralytics.nn.Concat_BiFPN import Concat_BiFPN
+from ultralytics.nn.We_Concat import We_Concat
 from ultralytics.nn.RFAConv import RFCBAMConv, RFCAConv, RFAConv
 from ultralytics.nn.CCSM import CCSM
 from ultralytics.nn.DAM import DAM, DAM1
-# from ultralytics.nn.RFMDSConv import RFMDSConv
 from ultralytics.nn.MDS import MDS
 from ultralytics.nn.RFCCSM import RFCCSMConv
 from ultralytics.nn.RFDAMConv import RFMDSConv
@@ -714,7 +713,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is Bi_FPN:
             length = len([ch[x] for x in f])
             args = [length]
-        elif m is Concat_BiFPN:
+        elif m is We_Concat:
             c2 = sum(ch[x] for x in f)
         elif m in (Detect, Segment, Pose):
             args.append([ch[x] for x in f])

@@ -58,37 +58,6 @@ class MDS(nn.Module):
         return out
 
 
-class MDS1(nn.Module):
-    def __init__(self, in_channels, channelAttention_reduce=4):
-        super().__init__()
-
-        self.C = in_channels
-        self.O = in_channels
-
-        self.dconv5_5 = nn.Conv2d(in_channels, in_channels, kernel_size=5, padding=2, groups=in_channels)
-        self.dconv1_7 = nn.Conv2d(in_channels, in_channels, kernel_size=(1, 7), padding=(0, 3), groups=in_channels)
-        self.dconv7_1 = nn.Conv2d(in_channels, in_channels, kernel_size=(7, 1), padding=(3, 0), groups=in_channels)
-        self.dconv1_11 = nn.Conv2d(in_channels, in_channels, kernel_size=(1, 9), padding=(0, 4), groups=in_channels)
-        self.dconv11_1 = nn.Conv2d(in_channels, in_channels, kernel_size=(9, 1), padding=(4, 0), groups=in_channels)
-        self.dconv1_21 = nn.Conv2d(in_channels, in_channels, kernel_size=(1, 11), padding=(0, 5), groups=in_channels)
-        self.dconv21_1 = nn.Conv2d(in_channels, in_channels, kernel_size=(11, 1), padding=(5, 0), groups=in_channels)
-        self.conv = nn.Conv2d(in_channels, in_channels, kernel_size=(1, 1), padding=0)
-
-    def forward(self, inputs):
-
-        x_init = self.dconv5_5(inputs)
-        x_1 = self.dconv1_7(x_init)
-        x_1 = self.dconv7_1(x_1)
-        x_2 = self.dconv1_11(x_init)
-        x_2 = self.dconv11_1(x_2)
-        x_3 = self.dconv1_21(x_init)
-        x_3 = self.dconv21_1(x_3)
-        x = x_1 + x_2 + x_3 + x_init
-        spatial_att = self.conv(x)
-        out = spatial_att * inputs
-        out = self.conv(out)  # 通道混合由空间注意模块的尾部使用1 × 1卷积进行
-        return out
-
 
 class SE(nn.Module):
     def __init__(self, in_channel, ratio=16):
